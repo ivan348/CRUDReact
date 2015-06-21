@@ -1,37 +1,37 @@
-(function () {
-    'use strict';
+// (function () {
+//     'use strict';
 
-    var libs = 'bower_components/';
+    var libs = '../bower_components/';
 
     requirejs.config({
+        baseUrl: 'scripts',
         paths: {
-
+            "react": libs + "react/react-with-addons",
+            "JSXTransformer": libs + "react/JSXTransformer",
+            "jsx": libs + "requirejs-react-jsx/jsx",
+            "text": libs + "requirejs-text/text"
         },
-        shim: {
-
+        shim : {
+            "react": {
+              "exports": "React"
+            },
+            "JSXTransformer": "JSXTransformer"
+        },
+        config: {
+            jsx: {
+                fileExtension: ".jsx",
+                transformOptions: {
+                    harmony: true,
+                    stripTypes: false,
+                    inlineSourceMap: true
+                },
+                usePragma: false
+            }
         }
     });
-
-    define('react', function (require) {
-        var React = require('../bower_components/react/react-with-addons');
-        window.React = React;
-        return React;
+    
+    require(['jsx!home'], function(Home){
+        var app = new Home();
+        app.init();
     });
-    define(function (require) {
-        var React = require('react');
-
-        var r = React.DOM;
-        var Header = React.createClass({
-            getInitialState: function () {
-                return {
-
-                };
-            },
-            render: function () {
-                var text = "hello";
-                return r.h1("text")
-            }
-        })
-    })
-    React.render(Header,document.getElementById('application'));
-})
+// })
