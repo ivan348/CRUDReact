@@ -9,13 +9,14 @@
             "react": libs + "react/react-with-addons",
             "JSXTransformer": libs + "react/JSXTransformer",
             "jsx": libs + "requirejs-react-jsx/jsx",
-            "text": libs + "requirejs-text/text"
+            "text": libs + "requirejs-text/text",
+            "react-bootstrap": libs + "react-bootstrap/react-bootstrap"
         },
         shim : {
             "react": {
               "exports": "React"
             },
-            "JSXTransformer": "JSXTransformer"
+            "JSXTransformer": "JSXTransformer",
         },
         config: {
             jsx: {
