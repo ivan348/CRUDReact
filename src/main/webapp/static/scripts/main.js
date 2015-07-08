@@ -1,5 +1,5 @@
 // (function () {
-//     'use strict';
+    'use strict';
 
     var libs = '../bower_components/';
 
@@ -31,7 +31,7 @@
     });
     
     require(['jsx!home'], function(Home){
-        var app = new Home();
-        app.init();
+        // var app = new Home();
+        Home.init();
     });
 // })

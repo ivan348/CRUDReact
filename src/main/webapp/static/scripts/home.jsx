@@ -1,4 +1,4 @@
- define([function (require) {
+ define(function (require) {
     var self = this;
     var React = require('react');
     var r = React.DOM;
@@ -10,11 +10,11 @@
         },
         render: function () {
             var text = "hello";
-            // return (<h1>text</h1>);
+            return <h1>{text}</h1>;
         }
     })
     this.init = function(){
-        React.render(Header,document.getElementById('application'));   
+        React.render(React.createElement(Header, null), document.getElementById('application'));   
     }
     return self
 })
