@@ -1,4 +1,4 @@
- define(function (require) {
+define(function (require) {
     var self = this;
     var React = require('react');
     var r = React.DOM;

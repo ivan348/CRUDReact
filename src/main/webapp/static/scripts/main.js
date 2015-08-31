@@ -10,7 +10,8 @@
             "JSXTransformer": libs + "react/JSXTransformer",
             "jsx": libs + "requirejs-react-jsx/jsx",
             "text": libs + "requirejs-text/text",
-            "react-bootstrap": libs + "react-bootstrap/react-bootstrap"
+            "react-bootstrap": libs + "react-bootstrap/react-bootstrap",
+            "reflux": libs + "reflux/dist/reflux"
         },
         shim : {
             "react": {

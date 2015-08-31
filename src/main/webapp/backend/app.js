@@ -37,6 +37,10 @@ app.use(function (err, req, res, next) {
         console.error(err);
         next(err);
     });
+app.get("/items", function(req,res){
+    var items = ["item 1", "item 2", "item 3"];
+    res.send(items);
+})
 
 app.listen(config.port, function () {
         console.log('http://localhost:' + config.port);
