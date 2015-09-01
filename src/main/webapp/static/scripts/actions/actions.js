@@ -3,12 +3,12 @@ define(function(require){
 	var Expenses = require("stores/Expenses");
 
 	var actions = Reflux.createActions([
-		"getExpense",
+		"getExpenses",
 		"addExpense",
-		/*"deleteExpense",
-		"editExpense"*/]);
+		"deleteExpense",
+		"editExpense"]);
 
-	actions.getExpense.listen(function(){
+	actions.getExpenses.listen(function(){
 		// http.get("/");
 	});
 	actions.addExpense.listen(function(val){

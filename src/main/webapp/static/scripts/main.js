@@ -11,7 +11,8 @@
             "jsx": libs + "requirejs-react-jsx/jsx",
             "text": libs + "requirejs-text/text",
             "react-bootstrap": libs + "react-bootstrap/react-bootstrap",
-            "reflux": libs + "reflux/dist/reflux"
+            "reflux": libs + "reflux/dist/reflux",
+            "lodash": libs + "lodash/lodash"
         },
         shim : {
             "react": {

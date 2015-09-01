@@ -5,6 +5,7 @@ define(function(require){
 	var {Input, Button} = require("react-bootstrap");
 	var Expenses = require("stores/Expenses");
 	var actions = require("actions/actions");
+	var Expense = require("jsx!./Expense");
 	return React.createClass({
 		mixins: [ 
 			React.addons.LinkedStateMixin,
@@ -20,6 +21,7 @@ define(function(require){
 			return <div>
 				<Input ref="title" type="text" onChange={this.handleChange}/>
 				<Button onClick={this.handleClick}>Add</Button>
+				<Expense/>
 				</div>
 		}
 	})
