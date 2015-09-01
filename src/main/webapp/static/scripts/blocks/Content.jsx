@@ -2,9 +2,7 @@ define(function(require){
 	var React = require("react");
 	var Reflux = require("reflux")
 	var apiCall = require("helpers/http");
-	var rb = require("react-bootstrap");
-	var Input = rb.Input;
-	var Button = rb.Button;
+	var {Input, Button} = require("react-bootstrap");
 	var Expenses = require("stores/Expenses");
 	var actions = require("actions/actions");
 	return React.createClass({
@@ -21,7 +19,7 @@ define(function(require){
 		render: function(){
 			return <div>
 				<Input ref="title" type="text" onChange={this.handleChange}/>
-				<Button onClick={this.handleClick}/>
+				<Button onClick={this.handleClick}>Add</Button>
 				</div>
 		}
 	})
