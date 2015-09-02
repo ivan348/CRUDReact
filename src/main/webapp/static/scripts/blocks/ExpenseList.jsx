@@ -6,6 +6,9 @@ define(function(require){
 				name: ""
 			}
 		},
+		componentDidMount: function(){
+
+		},
 		render: function(){
 			return <div>expense list</div>
 		}

@@ -42,8 +42,8 @@ define(function (require) {
     </Route>
     this.init = function(){
         // React.render(<Route children={routes}/>, document.getElementById('application'));   
-        Router.run(routes, Router.HashLocation, (Root) => {
-            React.render(<Root/>, document.getElementById('application'));
+        Router.run(routes, Router.HashLocation, (Ro1ot) => {
+            React.render(<Ro1ot/>, document.getElementById('application'));
         });
     }
     return self
