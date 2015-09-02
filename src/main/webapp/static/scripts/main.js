@@ -12,7 +12,8 @@
             "text": libs + "requirejs-text/text",
             "react-bootstrap": libs + "react-bootstrap/react-bootstrap",
             "reflux": libs + "reflux/dist/reflux",
-            "lodash": libs + "lodash/lodash"
+            "lodash": libs + "lodash/lodash",
+            "react-router": libs + "react-router/build/umd/ReactRouter"
         },
         shim : {
             "react": {

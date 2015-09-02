@@ -3,8 +3,14 @@ define(function (require) {
     var React = require('react');
     var r = React.DOM;
     var { Col, Row } = require('react-bootstrap');
-    var Menu = require("jsx!./blocks/Menu")
-    var Content = require("jsx!./blocks/Content")
+    var Menu = require("jsx!./blocks/Menu");
+    var Content = require("jsx!./blocks/Content");
+    var Router = require("react-router");
+    var Route = Router.Route;
+    var Routes = Router.Routes;
+    var RouteHandler = Router.RouteHandler;
+    var ExpenseList = require("jsx!./blocks/ExpenseList");
+
     var Header = React.createClass({
         getInitialState: function () {
             return {
@@ -25,14 +31,20 @@ define(function (require) {
                             <Menu/>
                         </Col>
                         <Col xs={10}>
-                            <Content/>    
+                            <RouteHandler/>   
                         </Col>
                     </Row>
                 </div>
         }
     })
+    var routes = <Route handler={Grid}>
+        <Route name="expense list" path="/expenses" handler={ExpenseList} />
+    </Route>
     this.init = function(){
-        React.render(React.createElement(Grid, null), document.getElementById('application'));   
+        // React.render(<Route children={routes}/>, document.getElementById('application'));   
+        Router.run(routes, Router.HashLocation, (Root) => {
+            React.render(<Root/>, document.getElementById('application'));
+        });
     }
     return self
 })
