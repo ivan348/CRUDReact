@@ -1,15 +1,12 @@
 define(function(require){
 	var Reflux = require("reflux");
 	var _collection = [];
-	var _ = require("lodash");
+	// var expenseActions = require("actions/actions");
 	var store = Reflux.createStore({
-		get: function(){
-			return _collection
-		},
-		set: function(collection){
-			_collection = collection;
-			return _collection
-		},
+	    // listenables: expenseActions,
+		// init: function(){
+		// 	this.listenTo(expenseActions.addExpense, this.onGetExpenses);	
+		// },
 		add: function(item){
 			_collection.push(item);
 			this.trigger(_collection);
@@ -17,6 +14,11 @@ define(function(require){
 		},
 		remove: function(item){
 
+		},
+		set: function(collection){
+			_collection = collection;
+			this.trigger(_collection);
+			return _collection;
 		}
 	})
 	return store;

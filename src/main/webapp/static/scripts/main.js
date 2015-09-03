@@ -13,7 +13,8 @@
             "react-bootstrap": libs + "react-bootstrap/react-bootstrap",
             "reflux": libs + "reflux/dist/reflux",
             "lodash": libs + "lodash/lodash",
-            "react-router": libs + "react-router/build/umd/ReactRouter"
+            "react-router": libs + "react-router/build/umd/ReactRouter",
+            "jquery": libs + "jquery/dist/jquery.min"
         },
         shim : {
             "react": {

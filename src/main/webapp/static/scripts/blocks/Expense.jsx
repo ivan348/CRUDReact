@@ -12,19 +12,33 @@ define(function(require){
 				name: ""
 			}
 		},
+		componentDidMount: function(){
+			this.setState({
+				name: this.props.name
+			})
+		},
 		handleClick: function(){
 			this.setState({
 				editing: !this.state.editing
 			})
 		},
+		handleChange: function(){
+			this.setState({
+				name: this.refs.name.getValue()
+			})
+		},
+		save: function(){
+			actions.editExpense(this.state);
+			this.handleClick();
+		},
 		render: function(){
 			var form = this.state.editing ? <div>
-					<Input type="text" value={this.props.name}/>
-					<Button bsStyle= "primary" onClick={this.handleClick}>
+					<Input type="text" ref="name" value={this.state.name} onChange={this.handleChange}/>
+					<Button bsStyle= "primary" onClick={this.save}>
 						Save
 					</Button>
 				</div> : <div>
-					<h3>{this.props.name}</h3>
+					<h3>{this.state.name}</h3>
 					<Button bsStyle= "primary" onClick={this.handleClick}>
 						Edit
 					</Button>
