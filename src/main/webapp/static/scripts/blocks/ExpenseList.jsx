@@ -12,21 +12,43 @@ define(function(require){
 		getInitialState: function(){
 			return {
 				expenseList: [],
-				editing: false
+				addingNew: false
 			}
 		},
-		handleClick: function(){
-
+		createNew: function(){
+			this.setState({
+				addingNew: true
+			})
 		},
 		componentDidMount: function(){
 			actions.getExpenses();
 		},
+		save: function(){
+			actions.addExpense({
+				name: this.refs.name.getValue(),
+				value: this.refs.value.getValue()
+			});
+			this.setState({
+				addingNew: false
+			});
+		},
 		render: function(){
-			var that = this;
 			var expenseList = this.state.expenseList.map(function(item){
-				return <Expense name={item.name}/>
-			})
-			return <div>{expenseList}</div>
+				return <Expense key={item.id} name={item.name} value={item.value} id={item.id}/>
+			});
+			var form = <div>
+					<Input type="text" ref="name" onChange={this.changeName}/>
+					<Input type="text" ref="value" onChange={this.changeValue}/>
+					<Button onClick={this.save}>
+						Save
+					</Button>
+				</div>
+			var button = this.state.addingNew ? form : 
+				<Button bsStyle="primary" onClick={this.createNew}>+</Button>;
+			return <div>
+				{expenseList}
+				{button}
+			</div>
 		}
 	})
 })

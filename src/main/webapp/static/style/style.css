@@ -1,0 +1,8 @@
+.expense-item {
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+.pointer {
+	cursor: pointer;
+}

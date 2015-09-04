@@ -6,6 +6,14 @@ define(function(require){
 		},
 		post: function(url, obj){
 			return $.post(url, obj);
+		},
+		put: function(url, obj){
+			return $.ajax({
+				url: url,
+				data: obj,
+				method: "PUT",
+				dataType: "json"
+			})
 		}
 	}
 	return http;

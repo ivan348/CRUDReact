@@ -1,7 +1,7 @@
 define(function(require){
 	var React = require('react');
 	var actions = require('actions/actions');
-	var {Col, Button, Input} = require('react-bootstrap');
+	var {Col, Button, Input, Row} = require('react-bootstrap');
 	return React.createClass({
 		mixins: [
 			React.LinkedStateMixin
@@ -9,12 +9,20 @@ define(function(require){
 		getInitialState: function(){
 			return {
 				editing: false,
-				name: ""
+				expense: {
+					id: 0,
+					name: "",
+					value: 0
+				}
 			}
 		},
 		componentDidMount: function(){
 			this.setState({
-				name: this.props.name
+				expense: {
+					id: this.props.id,
+					name: this.props.name,
+					value: this.props.value					
+				}
 			})
 		},
 		handleClick: function(){
@@ -22,30 +30,43 @@ define(function(require){
 				editing: !this.state.editing
 			})
 		},
-		handleChange: function(){
+		changeName: function(){
 			this.setState({
 				name: this.refs.name.getValue()
 			})
 		},
+		changeValue: function(){
+			this.setState({
+				value: this.refs.value.getValue()
+			})
+		},
 		save: function(){
-			actions.editExpense(this.state);
+			actions.editExpense(this.state.expense);
 			this.handleClick();
 		},
 		render: function(){
-			var form = this.state.editing ? <div>
-					<Input type="text" ref="name" value={this.state.name} onChange={this.handleChange}/>
-					<Button bsStyle= "primary" onClick={this.save}>
+			var form = this.state.editing ? <div>	
+					<Col xs={6} className="expense-item">
+						<Input type="text" ref="name" value={this.state.expense.name} onChange={this.changeName}/>
+					</Col>
+					<Col xs={6} className="expense-item">
+						<Input type="text" ref="value" value={this.state.expense.value} onChange={this.changeValue}/>
+					</Col>
+					<Button bsStyle="primary" onClick={this.save}>
 						Save
 					</Button>
 				</div> : <div>
-					<h3>{this.state.name}</h3>
-					<Button bsStyle= "primary" onClick={this.handleClick}>
-						Edit
-					</Button>
+					<Col xs={6} className="expense-item">
+						<p>{this.state.expense.name}</p>
+					</Col>
+					<Col xs={6} className="expense-item">
+						<p>{this.state.expense.value}</p>
+					</Col>
+					<i className="fa fa-pencil-square-o pointer" onClick={this.handleClick}></i>
 				</div>
-			return <Col xs={12}>
-				{form}				
-			</Col>
+			return <div>
+				{form}	
+			</div>
 		}
 	})
 })

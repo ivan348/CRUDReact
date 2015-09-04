@@ -26,14 +26,14 @@ define(function (require) {
         render: function(){
             return <div>
                     <Header/>
-                    <Row>
+                    <div>
                         <Col xs={2}>
                             <Menu/>
                         </Col>
                         <Col xs={10}>
                             <RouteHandler/>   
                         </Col>
-                    </Row>
+                    </div>
                 </div>
         }
     })
@@ -42,8 +42,8 @@ define(function (require) {
     </Route>
     this.init = function(){
         // React.render(<Route children={routes}/>, document.getElementById('application'));   
-        Router.run(routes, Router.HashLocation, (Ro1ot) => {
-            React.render(<Ro1ot/>, document.getElementById('application'));
+        Router.run(routes, Router.HashLocation, (Root) => {
+            React.render(<Root/>, document.getElementById('application'));
         });
     }
     return self

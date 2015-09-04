@@ -12,7 +12,10 @@ define(function(require){
 		http.get("/api/expenses").done(Expenses.set);
 	});
 	actions.editExpense.listen(function(val){
-		http.post("/api/expenses", val).done(Expenses.set);
+		http.put("/api/expenses", val).done();
+	});
+	actions.addExpense.listen(function(val){
+		http.post("/api/expenses", val).done(Expenses.add);
 	});
 	return actions;
 })
