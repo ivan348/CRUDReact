@@ -1,13 +1,6 @@
 var mysql = require("mysql");
-var pool = mysql.createPool({
-    connectionLimit: 10,
-    debug: false,
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "expenses"
-
-});
+var dbconfig = require("../config/dbconfig");
+var pool = mysql.createPool(dbconfig);
 var getConnection = function(callback) {
     return pool.getConnection(callback);
 }
