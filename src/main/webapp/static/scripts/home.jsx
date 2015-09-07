@@ -10,6 +10,7 @@ define(function (require) {
     var Routes = Router.Routes;
     var RouteHandler = Router.RouteHandler;
     var ExpenseList = require("jsx!./blocks/ExpenseList");
+    var Statistics = require("jsx!./blocks/Statistics");
 
     var Header = React.createClass({
         getInitialState: function () {
@@ -19,7 +20,9 @@ define(function (require) {
         },
         render: function () {
             var text = "hello";
-            return <h1>{text}</h1>;
+            return <h1>
+                <a href="#">{text}</a>
+            </h1>;
         }
     })
     var Grid = React.createClass({
@@ -39,6 +42,7 @@ define(function (require) {
     })
     var routes = <Route handler={Grid}>
         <Route name="expense list" path="/expenses" handler={ExpenseList} />
+        <Route name="statistics" path="/statistics" handler={Statistics} />
     </Route>
     this.init = function(){
         // React.render(<Route children={routes}/>, document.getElementById('application'));   
