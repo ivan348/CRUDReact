@@ -17,5 +17,8 @@ define(function(require){
 	actions.addExpense.listen(function(val){
 		http.post("/api/expenses", val).done(Expenses.add);
 	});
+	actions.deleteExpense.listen(function(val){
+		http.delete("/api/expenses", val).done(Expenses.remove);
+	});
 	return actions;
 })

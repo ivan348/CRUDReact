@@ -30,6 +30,9 @@ define(function(require){
 				editing: !this.state.editing
 			})
 		},
+		remove: function() {
+			actions.deleteExpense(this.state.expense);
+		},
 		changeName: function(){
 			this.setState({
 				name: this.refs.name.getValue()
@@ -46,6 +49,7 @@ define(function(require){
 		},
 		render: function(){
 			var form = this.state.editing ? <div>	
+					<i className="fa fa-times pointer" onClick={this.remove}></i>
 					<Col xs={6} className="expense-item">
 						<Input type="text" ref="name" value={this.state.expense.name} onChange={this.changeName}/>
 					</Col>

@@ -24,5 +24,9 @@ var rest = function(app, url, table){
 		db.editExpense(req.body);
 		res.send(req.body);
 	});
+	app.delete(url, function(req, res){
+		db.deleteExpense(req.body);
+		res.send(req.body);
+	});
 }
 module.exports = rest;
