@@ -1,16 +1,24 @@
 define(function(require) {
 	var React = require("react");
+	var Reflux = require("reflux");
 	var Chartist = require("chartist");
 	var highcharts = require("highcharts");
+	var ExpenseStore = require("stores/Expenses");
+	var actions = require("actions/actions");
 	var $ = require("jquery");
 	return React.createClass({
+		mixins: [
+			Reflux.connect(ExpenseStore, "expenseList")
+		],
 		getInitialState: function() {
 			return {
 				width : 100 ,
-				height : 100
+				height : 100,
+				expenseList: []
 			};
 		},
 		componentDidMount: function() {
+			actions.getExpenses();
 			this.setState({
 				chart: new Chartist.Pie('.ct-chart', {
 				    series: [20, 10, 30, 40]
@@ -20,7 +28,7 @@ define(function(require) {
 				labelDirection: 'explode'
 				})
 			});
-			$('#container').highcharts({
+			$('#high').highcharts({
 		        chart: {
 		            plotBackgroundColor: null,
 		            plotBorderWidth: null,
@@ -51,24 +59,24 @@ define(function(require) {
 		            colorByPoint: true,
 		            data: [{
 		                name: "Microsoft Internet Explorer",
-		                y: 56.33
+		                y: 50
 		            }, {
 		                name: "Chrome",
-		                y: 24.03,
+		                y: 20,
 		                sliced: true,
 		                selected: true
 		            }, {
 		                name: "Firefox",
-		                y: 10.38
+		                y: 15
 		            }, {
 		                name: "Safari",
-		                y: 4.77
+		                y: 5
 		            }, {
 		                name: "Opera",
-		                y: 0.91
+		                y: 5
 		            }, {
 		                name: "Proprietary or Undetectable",
-		                y: 0.2
+		                y: 5
 		            }]
 		        }]
 		    });
@@ -82,7 +90,7 @@ define(function(require) {
 		render: function() {			
 			return (
 				<div className="statitics">Statistics
-					<div id="high"></div>
+					<div id="high" width={this.state.width + "px"} height={this.state.height + "px"}></div>
 					<div className="ct-chart" width={this.state.width + "px"} height={this.state.height + "px"}></div>
 				</div>
 			);

@@ -20,9 +20,13 @@
         },
         shim : {
             "react": {
-              "exports": "React"
+              exports: "React"
             },
             "JSXTransformer": "JSXTransformer",
+            "highcharts": {
+                exports: "Highcharts",
+                deps: ["jquery"]
+            }
         },
         config: {
             jsx: {
