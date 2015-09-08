@@ -14,7 +14,9 @@
             "reflux": libs + "reflux/dist/reflux",
             "lodash": libs + "lodash/lodash",
             "react-router": libs + "react-router/build/umd/ReactRouter",
-            "jquery": libs + "jquery/dist/jquery.min"
+            "jquery": libs + "jquery/dist/jquery.min",
+            "chartist": libs + "chartist/dist/chartist.min",
+            "highcharts": libs + "highcharts/highcharts.src"
         },
         shim : {
             "react": {

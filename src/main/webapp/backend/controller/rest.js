@@ -4,16 +4,6 @@ var rest = function(app, url, table){
 		db.getExpenses(function(result){
 			res.json(result);
 		})
-		// res.send([{
-		// 	name: "expense 1",
-		// 	value: 12000
-		// },{
-		// 	name: "expense 2",
-		// 	value: 45000
-		// },{
-		// 	name: "expense 3",
-		// 	value: 15900
-		// }]);
 	});
 	app.post(url, function(req, res){
 		db.createExpense(req.body, function(result){

@@ -10,9 +10,13 @@ define(function(require) {
             return _collection;
         },
         remove: function(item) {
-        	_.remove(_collection, function(val){
-        		return item.id == val.id;
-        	})
+        	_.remove(_collection, { id : item.id });
+        	this.trigger(_collection);
+        	return item;
+        },
+        edit: function(item) {
+        	var index = _.findIndex(_collection, { id : item.id });
+        	_collection[index] = item;
         	this.trigger(_collection);
         	return item;
         },

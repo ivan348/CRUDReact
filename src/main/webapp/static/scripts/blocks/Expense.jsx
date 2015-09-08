@@ -4,7 +4,7 @@ define(function(require){
 	var {Col, Button, Input, Row} = require('react-bootstrap');
 	return React.createClass({
 		mixins: [
-			React.LinkedStateMixin
+			React.addons.LinkedStateMixin
 		],
 		getInitialState: function(){
 			return {
@@ -33,28 +33,36 @@ define(function(require){
 		remove: function() {
 			actions.deleteExpense(this.state.expense);
 		},
-		changeName: function(){
-			this.setState({
-				name: this.refs.name.getValue()
-			})
-		},
-		changeValue: function(){
-			this.setState({
-				value: this.refs.value.getValue()
-			})
-		},
+		// changeName: function(){
+		// 	this.setState({
+		// 		name: 
+		// 	})
+		// },
+		// changeValue: function(){
+		// 	this.setState({
+		// 		value: 
+		// 	})
+		// },
 		save: function(){
-			actions.editExpense(this.state.expense);
+			var expense = {
+				name: this.refs.name.getValue(),
+				value: this.refs.value.getValue()
+			};
+			this.setState({
+				expense: expense
+			});
+			actions.editExpense(expense);
 			this.handleClick();
 		},
 		render: function(){
+			console.log(this.linkState('expense'))
 			var form = this.state.editing ? <div>	
 					<i className="fa fa-times pointer" onClick={this.remove}></i>
 					<Col xs={6} className="expense-item">
-						<Input type="text" ref="name" value={this.state.expense.name} onChange={this.changeName}/>
+						<Input type="text" ref="name" valueLink={this.linkState('expense.name')}/>
 					</Col>
 					<Col xs={6} className="expense-item">
-						<Input type="text" ref="value" value={this.state.expense.value} onChange={this.changeValue}/>
+						<Input type="text" ref="value" defaultValue={this.state.expense.value}/>
 					</Col>
 					<Button bsStyle="primary" onClick={this.save}>
 						Save

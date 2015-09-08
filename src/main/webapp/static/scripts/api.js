@@ -10,17 +10,17 @@ define(function(require) {
         put: function(url, obj) {
             return $.ajax({
                 url: url,
-                data: obj,
+                data: JSON.stringify(obj),
                 method: "PUT",
-                dataType: "json"
+                contentType: "application/json"
             })
         },
         delete: function(url, obj) {
             return $.ajax({
                 url: url,
-                data: obj,
+                data: JSON.stringify(obj),
                 method: "DELETE",
-                dataType: "json"
+                contentType: "application/json"
             })
         }
     }
