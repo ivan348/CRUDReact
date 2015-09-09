@@ -1,7 +1,11 @@
-.expense-item {
-	border-width: 1px;
-	border-color: black;
-	border-style: solid;
+.expense-item:hover .buttons {
+	display: block;
+}
+.expense-item .buttons {
+	display: none;
+	position: absolute;
+    margin-left: -8px;
+    margin-top: -10px;
 }
 .pointer {
 	cursor: pointer;

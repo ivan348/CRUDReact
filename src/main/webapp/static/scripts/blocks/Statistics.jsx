@@ -90,8 +90,9 @@ define(function(require) {
 		render: function() {			
 			return (
 				<div className="statitics">Statistics
+					<div onClick={this.increase}>+</div>
 					<div id="high" width={this.state.width + "px"} height={this.state.height + "px"}></div>
-					<div className="ct-chart" width={this.state.width + "px"} height={this.state.height + "px"}></div>
+					<div className="ct-chart" style={{width: this.state.width + "px", height: this.state.height + "px"}} ></div>
 				</div>
 			);
 		}

@@ -4,7 +4,10 @@ var express = require('express');
 
 var config = require('./config.json');
 var app = express();
-var rest = require('./controller/rest')
+var rest = require('./controller/rest');
+var controller = require('./controller/controller');
+var db = require('./dao/db');
+db.createTables();
 
 app.use(function nocache(req, res, next) {
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
@@ -22,6 +25,7 @@ app.use(bodyParser.urlencoded({
 app.use('/', express.static(path.join(__dirname, '../static')));
 
 rest(app, '/api/expenses', "expenses");
+controller(app);
 
 app.use(function (err, req, res, next) {
         console.error(err);

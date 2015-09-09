@@ -11,6 +11,7 @@ define(function (require) {
     var RouteHandler = Router.RouteHandler;
     var ExpenseList = require("jsx!./blocks/ExpenseList");
     var Statistics = require("jsx!./blocks/Statistics");
+    var Summ = require("jsx!./blocks/Summ");
 
     var Header = React.createClass({
         getInitialState: function () {
@@ -31,6 +32,7 @@ define(function (require) {
                     <Header/>
                     <div>
                         <Col xs={2}>
+                            <Summ/>
                             <Menu/>
                         </Col>
                         <Col xs={10}>

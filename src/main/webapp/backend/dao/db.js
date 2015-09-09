@@ -1,8 +1,21 @@
 var pool = require("./../connections/pool");
+var createTables = function() {
+    pool.getConnection(function(err, connection) {
+        var query = "CREATE TABLE IF NOT EXISTS expenses(id INTEGER PRIMARY KEY AUTO_INCREMENT, name TEXT, value FLOAT(10,2), type TEXT, currency TEXT)";
+        connection.query(query, function(err, result) {
+            if(!err){
+
+            } else {
+                console.log(err);
+            }
+            connection.release();
+        })
+    })
+}
 var createExpense = function(data, callback) {
     pool.getConnection(function(err, connection) {
-        var query = "INSERT INTO expenses(name, value) VALUES (?,?)";
-        connection.query(query, [data.name, data.value], function(err, result) {
+        var query = "INSERT INTO expenses(name, value, type, currency) VALUES (?,?,?,?)";
+        connection.query(query, [data.name, data.value, data.type, data.currency], function(err, result) {
             if (!err) {
                 console.log("expense created " + data.name);
                 data.id = result.insertId;
@@ -11,8 +24,8 @@ var createExpense = function(data, callback) {
                 console.log(err);
             }
             connection.release();
-        });
-    });
+        })
+    })
 }
 var getExpenses = function(callback) {
     pool.getConnection(function(err, connection) {
@@ -25,21 +38,21 @@ var getExpenses = function(callback) {
                 console.log(err);
             }
             connection.release();
-        });
-    });
+        })
+    })
 }
 var editExpense = function(data, callback) {
     pool.getConnection(function(err, connection) {
-        var query = "UPDATE expenses SET name=?, value=? WHERE id=?";
-        connection.query(query, [data.name, data.value, data.id], function(err, rows) {
+        var query = "UPDATE expenses SET name=?, value=?, type=?, currency=? WHERE id=?";
+        connection.query(query, [data.name, data.value, data.type, data.currency, data.id], function(err, rows) {
             if (!err) {
                 console.log("expense edited " + data.name);
             } else {
                 console.log(err);
             }
             connection.release();
-        });
-    });
+        })
+    })
 }
 var deleteExpense = function(data, callback) {
     pool.getConnection(function(err, connection) {
@@ -55,6 +68,7 @@ var deleteExpense = function(data, callback) {
     })
 }
 module.exports = {
+    createTables: createTables,
     createExpense: createExpense,
     getExpenses: getExpenses,
     editExpense: editExpense,
