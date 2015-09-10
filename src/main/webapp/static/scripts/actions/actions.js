@@ -1,13 +1,14 @@
 define(function(require){
 	var Reflux = require("reflux");
 	var Expenses = require("stores/Expenses");
+	var Stat = require("stores/Stat");
 	var http = require("api");
 	var actions = Reflux.createActions([
 		"getExpenses",
 		"addExpense",
 		"deleteExpense",
 		"editExpense",
-		"getSumm"]);
+		"getStat"]);
 
 	actions.getExpenses.listen(function(){
 		http.get("/api/expenses").done(Expenses.set);
@@ -20,6 +21,9 @@ define(function(require){
 	});
 	actions.deleteExpense.listen(function(val){
 		http.delete("/api/expenses", val).done(Expenses.remove);
+	});
+	actions.getStat.listen(function(val){
+		http.get("/api/stats?currency=" + val).done(Stat.set);
 	});
 	return actions;
 })

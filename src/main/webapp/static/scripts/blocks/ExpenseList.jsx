@@ -12,6 +12,7 @@ define(function(require){
 	}
 	var currenciesOptions = mapOptions(["BYR", "USD", "EUR"]);
 	var typeOptions = mapOptions(["+", "-"]);
+	var categoryOptions = mapOptions(["Shop", "Cinema", "Eating", "Buying"])
 
 	return React.createClass({
 		mixins: [
@@ -37,7 +38,8 @@ define(function(require){
 				name: this.refs.name.getValue(),
 				value: this.refs.value.getValue(),
 				currency: this.refs.currency.getValue(),
-				type: this.refs.type.getValue()
+				type: this.refs.type.getValue(),
+				category: this.refs.category.getValue()
 			};			
 			if (expense.type == '-'){
 				expense.value = -1 * Math.abs(expense.value);
@@ -63,7 +65,8 @@ define(function(require){
 				name: this.refs["name" + item.id].getValue(),
 				value: this.refs["value" + item.id].getValue(),
 				currency: this.refs["currency" + item.id].getValue(),
-				type: this.refs["type" + item.id].getValue()
+				type: this.refs["type" + item.id].getValue(),
+				category: this.refs["category" + item.id].getValue()
 			};
 			if (expense.type == '-'){
 				expense.value = -1 * Math.abs(expense.value);
@@ -80,6 +83,7 @@ define(function(require){
 					<Input type="text" ref="value"/>
 					<Input type='select' ref="type">{typeOptions}</Input>
 					<Input type='select' ref="currency">{currenciesOptions}</Input>
+					<Input type='select' ref="category">{categoryOptions}</Input>
 					<Button onClick={this.saveNew}>
 						Save
 					</Button>
@@ -88,12 +92,6 @@ define(function(require){
 				<Button bsStyle="primary" onClick={this.createNew}>+</Button>;			
 			var expenseList = this.state.expenseList.map(function(item){
 				return <tr className={"expense-item " + (item.type =="+" ? "plus" : "minus")} key={item.id}> 
-					<td>
-						{self.state.editing == item.id ? <Input type='select' ref={"type" + item.id} defaultValue={item.type}>{typeOptions}</Input> : <p>{item.type}</p>}
-					</td>
-					<td>
-						{self.state.editing == item.id ? <Input type='select' ref={"currency" + item.id} defaultValue={item.currency}>{currenciesOptions}</Input> : <p>{item.currency}</p>}
-					</td>
 					<td>
 						{self.state.editing == item.id ? 
 							<span>
@@ -114,16 +112,26 @@ define(function(require){
 							<Input type="text" ref={"value" + item.id} defaultValue={item.value} onChange={this.changeValue}/> : 
 							<p>{item.value}</p>}
 					</td>
+					<td>
+						{self.state.editing == item.id ? <Input type='select' ref={"type" + item.id} defaultValue={item.type}>{typeOptions}</Input> : <p>{item.type}</p>}
+					</td>
+					<td>
+						{self.state.editing == item.id ? <Input type='select' ref={"currency" + item.id} defaultValue={item.currency}>{currenciesOptions}</Input> : <p>{item.currency}</p>}
+					</td>
+					<td>
+						{self.state.editing == item.id ? <Input type='select' ref={"category" + item.id} defaultValue={item.category}>{categoryOptions}</Input> : <p>{item.category}</p>}
+					</td>
 				</tr>
 			});
 			return <div>
 				<Table>
 				<thead>
 						<tr>
-							<th>Type</th>
-							<th>Currency</th>
 							<th>Name</th>
 							<th>Value</th>
+							<th>Type</th>
+							<th>Currency</th>
+							<th>Category</th>
 						</tr>
 					</thead>
 					<tbody> 

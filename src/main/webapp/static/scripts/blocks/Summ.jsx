@@ -12,9 +12,6 @@ define(function(require) {
 				result : {} 
 			};
 		},
-		componentDidMount: function() {
-			actions.getSumm();
-		},
 		render: function() {
 			var rows = [];
 			_.each(this.state.result, function(item, n){
