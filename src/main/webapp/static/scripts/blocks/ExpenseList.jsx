@@ -87,7 +87,7 @@ define(function(require){
 			var button = this.state.addingNew ? formNew : 
 				<Button bsStyle="primary" onClick={this.createNew}>+</Button>;			
 			var expenseList = this.state.expenseList.map(function(item){
-				return <tr className="expense-item" key={item.id}> 
+				return <tr className={"expense-item " + (item.type =="+" ? "plus" : "minus")} key={item.id}> 
 					<td>
 						{self.state.editing == item.id ? <Input type='select' ref={"type" + item.id} defaultValue={item.type}>{typeOptions}</Input> : <p>{item.type}</p>}
 					</td>
@@ -117,7 +117,7 @@ define(function(require){
 				</tr>
 			});
 			return <div>
-				<Table striped hover>
+				<Table>
 				<thead>
 						<tr>
 							<th>Type</th>

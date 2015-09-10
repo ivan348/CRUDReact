@@ -2,7 +2,6 @@ define(function(require) {
     var Reflux = require("reflux");
     var _ = require("lodash");
     var _collection = [];
-    // var expenseActions = require("actions/actions");
     var store = Reflux.createStore({
         add: function(item) {
             _collection.push(item);

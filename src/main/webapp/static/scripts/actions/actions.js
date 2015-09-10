@@ -1,7 +1,6 @@
 define(function(require){
 	var Reflux = require("reflux");
 	var Expenses = require("stores/Expenses");
-	var Summ = require("stores/Summ");
 	var http = require("api");
 	var actions = Reflux.createActions([
 		"getExpenses",
@@ -21,9 +20,6 @@ define(function(require){
 	});
 	actions.deleteExpense.listen(function(val){
 		http.delete("/api/expenses", val).done(Expenses.remove);
-	});
-	actions.getSumm.listen(function(val){
-		http.get("/api/summ", val).done(Summ.set);
 	});
 	return actions;
 })
