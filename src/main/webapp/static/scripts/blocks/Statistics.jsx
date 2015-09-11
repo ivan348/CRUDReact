@@ -20,10 +20,6 @@ define(function(require) {
 		componentDidMount: function() {
 			actions.getStat("BYR");
 		},
-		increase: function(){
-			
-		    console.log(this.state.stat)
-		},
 		render: function() {	
 			$('#high').highcharts({
 		        chart: {
@@ -52,14 +48,13 @@ define(function(require) {
 		            }
 		        },
 		        series: [{
-		            name: "Brands",
+		            name: "Expense",
 		            colorByPoint: true,
 		            data: this.state.stat
 		        }]
 		    });		
 			return (
-				<div className="statitics">Statistics
-					<div onClick={this.increase}>+</div>
+				<div className="statitics">
 					<Col xs={6} id="high" width={this.state.width + "px"} height={this.state.height + "px"}></Col>
 				</div>
 			);
