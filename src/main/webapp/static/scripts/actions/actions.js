@@ -3,15 +3,17 @@ define(function(require){
 	var Expenses = require("stores/Expenses");
 	var Stat = require("stores/Stat");
 	var http = require("api");
+	var _ = require("lodash");
 	var actions = Reflux.createActions([
 		"getExpenses",
 		"addExpense",
 		"deleteExpense",
 		"editExpense",
-		"getStat"]);
+		"getStat",
+		"uploadFile"]);
 
 	actions.getExpenses.listen(function(){
-		http.get("/api/expenses").done(Expenses.set);
+		http.get("api/expenses").done(Expenses.set);
 	});
 	actions.editExpense.listen(function(val){
 		http.put("/api/expenses", val).done(Expenses.edit);
@@ -24,6 +26,15 @@ define(function(require){
 	});
 	actions.getStat.listen(function(val){
 		http.get("/api/stats?currency=" + val).done(Stat.set);
+	});
+	actions.uploadFile.listen(function(files){
+		var data = new FormData();
+		_.each(files, function(value, key) {
+			data.append(key, value);
+		})
+		http.post("/api/uploadcsv", data, {processData: false}).done(function(res) {
+			console.log("uploaded")
+		})
 	});
 	return actions;
 })

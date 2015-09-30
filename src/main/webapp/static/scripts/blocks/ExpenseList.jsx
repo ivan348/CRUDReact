@@ -3,8 +3,8 @@ define(function(require){
 	var Reflux = require("reflux");
 	var {Input, Button, Col, Table} = require("react-bootstrap");
 	var actions = require("actions/actions");
-	var ExpenseStore = require("stores/Expenses");
-	var Expense = require("jsx!blocks/Expense");
+	var ExpenseStore = require("stores/Expenses");	
+	var http = require("api");
 	var mapOptions = function(arr) {
 		return arr.map(function(item){
 			return <option key={item} value={item}>{item}</option>
@@ -76,6 +76,10 @@ define(function(require){
 			actions.editExpense(expense);
 			this.handleClick(item);
 		},
+		upload: function(e){
+			var files = e.target.files;
+			actions.uploadFile(files);
+		},
 		render: function(){
 			var self=this;
 			var formNew = <div>
@@ -123,9 +127,10 @@ define(function(require){
 					</td>
 				</tr>
 			});
-			return <div>
+			return <div>			
+				<input ref="upload" type="file" name="upload" onChange={this.upload}/>
 				<Table>
-				<thead>
+					<thead>
 						<tr>
 							<th>Name</th>
 							<th>Value</th>
