@@ -15,6 +15,7 @@ define(function(require) {
             if (opt) {
                 conf = _.assign(conf, opt)
             }
+            console.log(conf)
             return $.ajax(conf);
         },
         put: function(url, obj, opt) {

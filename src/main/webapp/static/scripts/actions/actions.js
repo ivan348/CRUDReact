@@ -29,10 +29,8 @@ define(function(require){
 	});
 	actions.uploadFile.listen(function(files){
 		var data = new FormData();
-		_.each(files, function(value, key) {
-			data.append(key, value);
-		})
-		http.post("/api/uploadcsv", data, {processData: false}).done(function(res) {
+		data.append("file", files[0]);
+		http.post("/api/uploadcsv", data, {data: data, processData: false, contentType: false}).done(function(res) {
 			console.log("uploaded")
 		})
 	});

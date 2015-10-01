@@ -13,8 +13,8 @@ var getStats = function(list) {
 	var result = [];
 	var categories = _.uniq(_.pluck(list, 'category'));
 	var summ = _.sum(_.filter(list, {type: "-"}), function(obj){
-			return obj.value;
-		});
+		return obj.value;
+	});
 	_.each(categories, function(cat) {
 		var obj = {};
 		obj.name = cat;
@@ -25,7 +25,11 @@ var getStats = function(list) {
 	})
 	return result;
 }
+var importFromCsv = function(fileName) {
+	
+}
 module.exports = {
 	getSumm: getSumm,
-	getStats: getStats
+	getStats: getStats,
+	importFromCsv: importFromCsv
 }
