@@ -5,6 +5,7 @@ define(function(require){
 	var actions = require("actions/actions");
 	var ExpenseStore = require("stores/Expenses");	
 	var http = require("api");
+	var fileUploader = require("helpers/fileUploader");
 	var mapOptions = function(arr) {
 		return arr.map(function(item){
 			return <option key={item} value={item}>{item}</option>
@@ -78,7 +79,12 @@ define(function(require){
 		},
 		upload: function(e){
 			var files = e.target.files;
-			actions.uploadFile(files);
+			var _onUpload = function(){
+
+			}
+			if(files.length != 0) {
+				fileUploader.uploadFile(files, _onUpload)
+			}
 		},
 		render: function(){
 			var self=this;
@@ -127,8 +133,10 @@ define(function(require){
 					</td>
 				</tr>
 			});
-			return <div>			
-				<input ref="upload" type="file" name="upload" onChange={this.upload}/>
+			return <div>
+				<form>			
+					<input ref="upload" type="file" name="upload" onChange={this.upload}/>
+				</form>
 				<Table>
 					<thead>
 						<tr>

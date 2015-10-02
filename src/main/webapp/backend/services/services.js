@@ -1,4 +1,6 @@
-var _ = require("lodash");
+var _ = require("lodash"),
+	fs = require("fs"),
+	csv = require("fast-csv");
 var getSumm = function(list){
 	var result = {};
 	var currencies = _.uniq(_.pluck(list, 'currency'));
@@ -25,8 +27,18 @@ var getStats = function(list) {
 	})
 	return result;
 }
-var importFromCsv = function(fileName) {
-	
+var importFromCsv = function(file) {
+	var stream = fs.createReadStream(file);
+	csv.fromStream(stream).on("data", function(data){
+		var type = data[2] != "" ? "-" : "+";
+		console.log(type)
+	}).on("end", function(){
+		fs.unlink(file, function(err) {
+			if(err) {
+				console.log(err);
+			}
+		})
+	});
 }
 module.exports = {
 	getSumm: getSumm,

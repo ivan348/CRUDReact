@@ -9,8 +9,7 @@ define(function(require){
 		"addExpense",
 		"deleteExpense",
 		"editExpense",
-		"getStat",
-		"uploadFile"]);
+		"getStat"]);
 
 	actions.getExpenses.listen(function(){
 		http.get("api/expenses").done(Expenses.set);
@@ -26,13 +25,6 @@ define(function(require){
 	});
 	actions.getStat.listen(function(val){
 		http.get("/api/stats?currency=" + val).done(Stat.set);
-	});
-	actions.uploadFile.listen(function(files){
-		var data = new FormData();
-		data.append("file", files[0]);
-		http.post("/api/uploadcsv", data, {data: data, processData: false, contentType: false}).done(function(res) {
-			console.log("uploaded")
-		})
 	});
 	return actions;
 })
